@@ -28,7 +28,17 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-npm-cache
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install pnpm
+          pnpm install
+      - name: Install Hexo-cli # 安装 Hexo
+        run: |
+          npm install -g hexo-cli --save
+          echo "install hexo successful"
+      - name: Install Anzhiyu Theme # 安装 Anzhiyu 主题
+        run: |
+          npm uninstall hexo-theme-anzhiyu
+          npm install hexo-theme-anzhiyu
       - name: Build
         run: npm run build
       - name: Upload Pages artifact
